@@ -21,7 +21,7 @@ def cadastrar_funcionario(id): # cria-se função com parâmetro id
 
 
 
-def consultar_funcionários(): # cria-se função
+def consultar_funcionarios(): # cria-se função
     opcao = '' # inicializa variavél opcao de modo a iniciar o laço while
     while opcao != 4: # enquanto a opcao for distinta de 4 
         print(f""" {'**'*30}
@@ -76,7 +76,7 @@ def remover_funcionario():  # cria-se função
             if k == "código" and remove == v: # se a chave = código e valor = remove
                 funcionario["status"] = 0 # Altera-se o status do 'funcionario' (dict) da lista colaboradores para zero, afim de ocultá-lo
 
-def atualizar_funcionario():
+def atualizar_funcionario(): # cria-se função 
     print(f""" {'**'*30}
     {'--'*15} Menu atualizar Funcionário  {'--'*15}  
      """)# printa menu
@@ -85,7 +85,7 @@ def atualizar_funcionario():
         for k,v in funcionario.items(): # para cada chave e valor em funcionário
             if k == "código" and atualiza == v: # se a chave = código e valor = atualiza
                 opcao = '' # inicializa variavél opcao de modo a iniciar o laço while
-                while opcao != 6: # enquanto a opcao for distinta de 4 
+                while opcao != 6: # enquanto a opcao for distinta de 6 
                     print(f""" {'**'*30}
                     {'--'*15} Qual informação deseja alterar? {'--'*15}
                     Escolha a opção desejada:
@@ -181,7 +181,7 @@ while opcao != 5: # se opcao diferente de 4, faça-se :
         #print(f'Funcionário {colaboradores[funcionario["código"]] == id }')
         id +=1 # incremento do ID para cada fncionario novo cadastrado
     if opcao == 2: #se opcao = 2
-        consultar_funcionários() #chama função consulta
+        consultar_funcionarios() #chama função consulta
     if opcao == 3: # se opcao = 3
         atualizar_funcionario()
     if opcao == 4: #se opcao = 3
