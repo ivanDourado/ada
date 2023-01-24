@@ -1,12 +1,16 @@
 from time import sleep # importa a biblioteca time para aplicar o método sleep() que proporciona um delay desejado
 
-colaboradores = list() # # cria-se o lista colaboradores
+colaboradores = [
+    {'status':1, 'código':7401,'nome':'Gabriel','telefone':'12345678','endereco':'Rua A','setor':'A','salario':3000},
+    {'status':1, 'código':7402,'nome':'Iohana','telefone':'32145678','endereco':'Rua B','setor':'B','salario':3500},
+    {'status':1, 'código':7403,'nome':'Fábio','telefone':'43215678','endereco':'Rua C','setor':'C','salario':3300},    
+    ] # # cria-se o lista colaboradores
 funcionario = dict() # cria-se o dicionário funcionario
-id = 7401 # inicializa variavél Id, para ocorrer seu incremento na linha l.86
+id = 7404 # inicializa variavél Id, para ocorrer seu incremento na linha l.86
 def cadastrar_funcionario(id): # cria-se função com parâmetro id
-    print(f""" {'**'*30}
-    {'--'*15} Menu Cadastrar Funcionário  {'--'*15}  
-     """) # printa menu
+    string = 'Menu Cadastrar Funcionário'
+    
+    print(string.center(80,'-')) # printa menu
     funcionario['status']=1
     funcionario["código"] = id # No dicionário funcionário, criar-se-á uma chave 'código' que receberá o valor id (paramero da função)
     funcionario["nome"] = str(input('Por favor entre com o Nome: ')) # No dicionário funcionário, criar-se-á uma chave 'nome' que receberá o valor string inserido pelo usuário
@@ -24,8 +28,11 @@ def cadastrar_funcionario(id): # cria-se função com parâmetro id
 def consultar_funcionarios(): # cria-se função
     opcao = '' # inicializa variavél opcao de modo a iniciar o laço while
     while opcao != 4: # enquanto a opcao for distinta de 4 
-        print(f""" {'**'*30}
-        {'--'*15} Menu Consultar Funcionário {'--'*15}
+        string = 'Menu Consultar Funcionário'
+    
+        print(string.center(80,'-')) # printa menu
+        print(f""" 
+        
         Escolha a opção desejada:
         1) Consultar Todos os Funcionários
         2) Consultar Funcionário por Id
@@ -67,34 +74,40 @@ def consultar_funcionarios(): # cria-se função
           
 
 def remover_funcionario():  # cria-se função
-     print(f""" {'**'*30}
-    {'--'*15} Menu Remover Funcionário  {'--'*15}  
-     """)# printa menu
-     remove = int(input('Digite o código/ID do funcionário a ser removido: ')) # solicita o dado ao usuário[id]
-     for funcionario in colaboradores: #para cada funcionario (dict) em colaboradores(list)
+    string = 'Menu Remover Funcionário'
+    print('**'*30)
+    print(string.center(80,'-')) # printa menu
+     
+    remove = int(input('Digite o código/ID do funcionário a ser removido: ')) # solicita o dado ao usuário[id]
+    for funcionario in colaboradores: #para cada funcionario (dict) em colaboradores(list)
         for k,v in funcionario.items(): # para cada chave e valor em funcionário
             if k == "código" and remove == v: # se a chave = código e valor = remove
-                funcionario["status"] = 0 # Altera-se o status do 'funcionario' (dict) da lista colaboradores para zero, afim de ocultá-lo
+               funcionario["status"] = 0 # Altera-se o status do 'funcionario' (dict) da lista colaboradores para zero, afim de ocultá-lo
+    
 
 def atualizar_funcionario(): # cria-se função 
-    print(f""" {'**'*30}
-    {'--'*15} Menu atualizar Funcionário  {'--'*15}  
-     """)# printa menu
+    string = 'Menu atualizar Funcionário'
+    print('**'*30)
+    print(string.center(80,'-')) # printa menu
+    
     atualiza = int(input('Digite o código/ID do funcionário a ser atualizado: ')) # solicita o dado ao usuário[id]
     for funcionario in colaboradores: #para cada funcionario (dict) em colaboradores(list)
         for k,v in funcionario.items(): # para cada chave e valor em funcionário
             if k == "código" and atualiza == v: # se a chave = código e valor = atualiza
                 opcao = '' # inicializa variavél opcao de modo a iniciar o laço while
                 while opcao != 6: # enquanto a opcao for distinta de 6 
-                    print(f""" {'**'*30}
-                    {'--'*15} Qual informação deseja alterar? {'--'*15}
-                    Escolha a opção desejada:
-                    1) Alterar Nome
-                    2) Alterar Telefone
-                    3) Alterar Endereço
-                    4) Alterar Setor
-                    5) Alterar Salário
-                    6) Retornar  
+                    string = 'Qual informação deseja alterar?'
+                    print('**'*30)
+                    print(string.center(80,'-')) # printa menu
+                    print(f""" 
+                    
+        Escolha a opção desejada:
+        1) Alterar Nome
+        2) Alterar Telefone
+        3) Alterar Endereço
+        4) Alterar Setor
+        5) Alterar Salário
+        6) Retornar  
                     """) # printa menu atualiza
                     opcao = input('>>>> ') # solicita o dado ao usuário
                     if opcao not in ['1','2','3','4','5','6']:
@@ -165,7 +178,9 @@ print(f""" Bem vindo ao controle de funcionários Do time Azul
 {'**'*30} """) # boas- vindas ao meu programa
 opcao = '' # inicializa opçao
 while opcao != 5: # se opcao diferente de 4, faça-se :
-    print(f""" {'--'*15} Menu Principal {'--'*15}
+    string = 'Menu Principal'
+    print(string.center(80,'-'))
+    print(f""" 
         1. Cadastrar Funcionário
         2. Consultar Funcionários(s)
             1) Consultar Todas as Funcionários
@@ -186,6 +201,7 @@ while opcao != 5: # se opcao diferente de 4, faça-se :
         atualizar_funcionario()
     if opcao == 4: #se opcao = 3
         remover_funcionario() #chama função remove
+        print('Funcionário removido com sucesso!')
     if opcao == 5: #se opcao = 4
         print('>>> Obrigado! Volte Sempre <<<') # imprime saudaçao de termino da aplicação
         print('**'*30)
