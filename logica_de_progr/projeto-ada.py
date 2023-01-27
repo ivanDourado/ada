@@ -8,20 +8,54 @@ colaboradores = [
 funcionario = dict() # cria-se o dicionário funcionario
 id = 7404 # inicializa variavél Id, para ocorrer seu incremento na linha l.86
 def cadastrar_funcionario(id): # cria-se função com parâmetro id
-    string = 'Menu Cadastrar Funcionário'
-    
+    string = 'Menu Cadastrar Funcionário'    
     print(string.center(80,'-')) # printa menu
     funcionario['status']=1
     funcionario["código"] = id # No dicionário funcionário, criar-se-á uma chave 'código' que receberá o valor id (paramero da função)
-    funcionario["nome"] = str(input('Por favor entre com o Nome: ')) # No dicionário funcionário, criar-se-á uma chave 'nome' que receberá o valor string inserido pelo usuário
-    funcionario["telefone"] = str(input('Por favor entre com o Telefone: ')) # No dicionário funcionário, criar-se-á uma chave 'Telefone' que receberá o valor string inserido pelo usuário
-    funcionario["endereco"] = str(input('Por favor entre com o endereço: ')) # No dicionário funcionário, criar-se-á uma chave 'endereco' que receberá o valor string inserido pelo usuário
-    funcionario["setor"] = str(input('Por favor entre com o setor [A-Z]: ')).upper().strip()[0] # No dicionário funcionário, criar-se-á uma chave 'setor' que receberá o valor string inserido pelo usuário
-    funcionario["salario"] = float(input('Por favor entre com o salário: ')) # No dicionário funcionário, criar-se-á uma chave 'a' que receberá o valor float inserido pelo usuário
+    while True:
+        funcionario["nome"] = str(input('Por favor entre com o Nome: ')).strip() # No dicionário funcionário, criar-se-á uma chave 'nome' que receberá o valor string inserido pelo usuário
+        while funcionario['nome'] == '' or funcionario['nome'] == ' ':
+            print('\033[0;31mCampo vazio. Digite seu nome\033[m')
+            funcionario["nome"] = str(input('Por favor entre com o Nome: ')).strip()
+        if funcionario['nome'] != '':
+            break
+    while True:
+        funcionario["telefone"] = str(input('Por favor entre com o Telefone: ')).strip() # No dicionário funcionário, criar-se-á uma chave 'Telefone' que receberá o valor string inserido pelo usuário
+        while not funcionario["telefone"].isnumeric():
+            print('\033[0;31mCampo incorreto. Digite seu número com 9 dígitos mais 2 díditos do DDD.\033[m')
+            funcionario["telefone"] = str(input('Por favor entre com o Telefone: '))
+        if len(funcionario["telefone"]) == 11 and funcionario["telefone"].isnumeric():
+            break
+        print('\033[0;31mCampo incorreto. Digite seu número com 9 dígitos mais 2 díditos do DDD.\033[m')
+    while True:
+        funcionario["endereco"] = str(input('Por favor entre com o endereço: ')).strip() # No dicionário funcionário, criar-se-á uma chave 'endereco' que receberá o valor string inserido pelo usuário
+        while funcionario["endereco"] == '':
+            print('\033[0;31mCampo vazio. Digite seu Endereço válido.\033[m')
+            funcionario["endereco"] = str(input('Por favor entre com o endereço: ')).strip()
+        if funcionario["endereco"] != '' and funcionario["endereco"] != ' ':
+            break 
+    while True:
+        setor = funcionario["setor"] = str(input('Por favor entre com o setor [A-Z]: ')).upper() # No dicionário funcionário, criar-se-á uma chave 'setor' que receberá o valor string inserido pelo usuário
+        
+        while  not setor.isalpha() :
+            print('\033[0;31mCampo inválido. Digite um setor válido de A-Z.\033[m')
+            setor =funcionario["setor"] = str(input('Por favor entre com o setor [A-Z]: ')).upper()
+        if setor.upper()[0] != '' and setor.upper().strip()[0].isalpha():
+            break        
+    while True:
+        try:
+            funcionario["salario"] = float(input('Por favor entre com o salário: ')) # No dicionário funcionário, criar-se-á uma chave 'a' que receberá o valor float inserido pelo usuário
+        except (ValueError, TypeError):
+            print('\033[0;31mERRO! Por favor, digite um valor numérico válido maior que zero.\033[m')
+        else:
+            if funcionario["salario"]<=0:
+                print('\033[0;31mSalário inválido. Insira um salário numérico superior a zero.\033[m')  
+            else:
+                break
     colaboradores.append(funcionario.copy()) # na lista colaboradores, ao seu final de comprimento, receberá como último ítem uma cópia do dicionário funcionário
     print('**'*30)
     nome = funcionario["nome"]
-    print(f'\nFuncionário {nome} cadastrado(a) com sucesso!')
+    print(f'\033[32m\nFuncionário {nome} cadastrado(a) com sucesso!\033[m')
 
 
 
@@ -120,7 +154,7 @@ def atualizar_funcionario(): # cria-se função
                                     break
                                 value = funcionario["nome"] = novo_nome  
                                 print(f'{key} : {value}.') # imprime  chave e valor
-                                print('Nome Atualizado com Sucesso! ')
+                                print('\033[32mNome Atualizado com Sucesso! \033[m')
                                 sleep(.4)
                         print('-'*10)
                     if opcao == '2': # se opcao = 2
@@ -132,7 +166,7 @@ def atualizar_funcionario(): # cria-se função
                             if k == "telefone":
                                 v = funcionario["telefone"] = telefone
                                 print(f'{k} : {v}') # imprime  chave e valor
-                                print('Telefone Atualizado com Sucesso! ')
+                                print('\033[32mTelefone Atualizado com Sucesso! \033[m')
                         print() # pula linha
                     if opcao == '3': # se opcao = 3
                         endereco = str(input('Insira o novo endereço do Funcionário: (999 para parar) ')) # atualizar endereco
@@ -143,7 +177,7 @@ def atualizar_funcionario(): # cria-se função
                             if k == "endereco": # se busca for igual ao valor da chave 'setor'
                                 v = funcionario["endereco"] = endereco
                                 print(f'{k} : {v}')  # imprime  chave e valor
-                                print('Endereço Atualizado com Sucesso! ')
+                                print('\033[32mEndereço Atualizado com Sucesso! \033[m')
                         print() # pula linha
                     if opcao == '4': # se opcao = 4
                         setor = str(input('Insira o novo setor do Funcionário [A-Z]: (999 para parar) ')).upper().strip()[0] # atualizar setor
@@ -154,7 +188,7 @@ def atualizar_funcionario(): # cria-se função
                             if k == "setor": # se busca for igual ao valor da chave 'setor'
                                 v = funcionario["setor"] = setor
                                 print(f'{k} : {v}')  # imprime  chave e valor
-                                print('Setor Atualizado com Sucesso! ')
+                                print('\033[32mSetor Atualizado com Sucesso! \033[m')
                         print() # pula linha
                     if opcao == '5': # se opcao = 5
                         salario = float(input('Insira o novo salario do Funcionário : (aperte enter para parar) ')) # atualizar salario
@@ -165,7 +199,7 @@ def atualizar_funcionario(): # cria-se função
                             if k == "salario": # se busca for igual ao valor da chave 'salario'
                                 v = funcionario["salario"] = salario
                                 print(f'{k} : {v}')  # imprime  chave e valor
-                                print('Salário Atualizado com Sucesso! ')
+                                print('\033[32mSalário Atualizado com Sucesso! \033[m')
                         print() # pula linha
                     if opcao == '6': # se opcao = 6
                         break # interrompe
@@ -201,7 +235,7 @@ while opcao != 5: # se opcao diferente de 4, faça-se :
         atualizar_funcionario()
     if opcao == 4: #se opcao = 3
         remover_funcionario() #chama função remove
-        print('Funcionário removido com sucesso!')
+        print('\033[32mFuncionário removido com sucesso!\033[m')
     if opcao == 5: #se opcao = 4
         print('>>> Obrigado! Volte Sempre <<<') # imprime saudaçao de termino da aplicação
         print('**'*30)
