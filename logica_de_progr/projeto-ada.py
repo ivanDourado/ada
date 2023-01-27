@@ -4,7 +4,7 @@ colaboradores = [
     {'status':1, 'código':7401,'nome':'Gabriel','telefone':'12345678','endereco':'Rua A','setor':'A','salario':3000},
     {'status':1, 'código':7402,'nome':'Iohana','telefone':'32145678','endereco':'Rua B','setor':'B','salario':3500},
     {'status':1, 'código':7403,'nome':'Fábio','telefone':'43215678','endereco':'Rua C','setor':'C','salario':3300},    
-    ] # # cria-se o lista colaboradores
+    ] # # cria-se a lista de colaboradores com 3 pre-existentes
 funcionario = dict() # cria-se o dicionário funcionario
 id = 7404 # inicializa variavél Id, para ocorrer seu incremento na linha l.86
 def cadastrar_funcionario(id): # cria-se função com parâmetro id
@@ -12,50 +12,51 @@ def cadastrar_funcionario(id): # cria-se função com parâmetro id
     print(string.center(80,'-')) # printa menu
     funcionario['status']=1
     funcionario["código"] = id # No dicionário funcionário, criar-se-á uma chave 'código' que receberá o valor id (paramero da função)
-    while True:
+    # validações de dados
+    while True: # loop infinito que terminará com break
         funcionario["nome"] = str(input('Por favor entre com o Nome: ')).strip() # No dicionário funcionário, criar-se-á uma chave 'nome' que receberá o valor string inserido pelo usuário
-        while funcionario['nome'] == '' or funcionario['nome'] == ' ':
-            print('\033[0;31mCampo vazio. Digite seu nome\033[m')
-            funcionario["nome"] = str(input('Por favor entre com o Nome: ')).strip()
-        if funcionario['nome'] != '':
-            break
-    while True:
+        while funcionario['nome'] == '' or funcionario['nome'] == ' ': # enquanto o resultado for vazio ou espaço
+            print('\033[0;31mCampo vazio. Digite seu nome\033[m')# printa mensagem colorida
+            funcionario["nome"] = str(input('Por favor entre com o Nome: ')).strip() # solicita novamente o dado ao usuario
+        if funcionario['nome'] != '': # se não for vazio
+            break # interrompe corrente laço
+    while True: # loop infinito que terminará com break
         funcionario["telefone"] = str(input('Por favor entre com o Telefone: ')).strip() # No dicionário funcionário, criar-se-á uma chave 'Telefone' que receberá o valor string inserido pelo usuário
-        while not funcionario["telefone"].isnumeric():
-            print('\033[0;31mCampo incorreto. Digite seu número com 9 dígitos mais 2 díditos do DDD.\033[m')
+        while not funcionario["telefone"].isnumeric(): # se o valor da chave não for numérico
+            print('\033[0;31mCampo incorreto. Digite seu número com 9 dígitos mais 2 díditos do DDD.\033[m')# printa mensagem colorida
             funcionario["telefone"] = str(input('Por favor entre com o Telefone: '))
         if len(funcionario["telefone"]) == 11 and funcionario["telefone"].isnumeric():
-            break
-        print('\033[0;31mCampo incorreto. Digite seu número com 9 dígitos mais 2 díditos do DDD.\033[m')
-    while True:
+            break # interrompe corrente laço
+        print('\033[0;31mCampo incorreto. Digite seu número com 9 dígitos mais 2 díditos do DDD.\033[m')# printa mensagem colorida
+    while True: # loop infinito que terminará com break
         funcionario["endereco"] = str(input('Por favor entre com o endereço: ')).strip() # No dicionário funcionário, criar-se-á uma chave 'endereco' que receberá o valor string inserido pelo usuário
-        while funcionario["endereco"] == '':
-            print('\033[0;31mCampo vazio. Digite seu Endereço válido.\033[m')
+        while funcionario["endereco"] == '': # enquanto o resultado for vazio 
+            print('\033[0;31mCampo vazio. Digite seu Endereço válido.\033[m')# printa mensagem colorida
             funcionario["endereco"] = str(input('Por favor entre com o endereço: ')).strip()
-        if funcionario["endereco"] != '' and funcionario["endereco"] != ' ':
-            break 
-    while True:
+        if funcionario["endereco"] != '' and funcionario["endereco"] != ' ': # se não for vazio
+            break # interrompe corrente laço
+    while True: # loop infinito que terminará com break
         setor = funcionario["setor"] = str(input('Por favor entre com o setor [A-Z]: ')).upper() # No dicionário funcionário, criar-se-á uma chave 'setor' que receberá o valor string inserido pelo usuário
         
-        while  not setor.isalpha() :
-            print('\033[0;31mCampo inválido. Digite um setor válido de A-Z.\033[m')
-            setor =funcionario["setor"] = str(input('Por favor entre com o setor [A-Z]: ')).upper()
-        if setor.upper()[0] != '' and setor.upper().strip()[0].isalpha():
-            break        
-    while True:
-        try:
+        while  not setor.isalpha() : # se o valor da variável, chave do dicionário, não for alfabético
+            print('\033[0;31mCampo inválido. Digite um setor válido de A-Z.\033[m')# printa mensagem colorida
+            setor =funcionario["setor"] = str(input('Por favor entre com o setor [A-Z]: ')).upper() # variavel recebe novo valor input que alocará novo valor na chave setor
+        if setor.upper()[0] != '' and setor.upper().strip()[0].isalpha(): # se não for vazio e for valor alfabético
+            break # interrompe corrente laço       
+    while True: # loop infinito que terminará com break
+        try: # tente (tratamento de erros)
             funcionario["salario"] = float(input('Por favor entre com o salário: ')) # No dicionário funcionário, criar-se-á uma chave 'a' que receberá o valor float inserido pelo usuário
-        except (ValueError, TypeError):
-            print('\033[0;31mERRO! Por favor, digite um valor numérico válido maior que zero.\033[m')
-        else:
-            if funcionario["salario"]<=0:
-                print('\033[0;31mSalário inválido. Insira um salário numérico superior a zero.\033[m')  
-            else:
-                break
+        except (ValueError, TypeError): # erro/exceção do tipo ValueError ou TypeError
+            print('\033[0;31mERRO! Por favor, digite um valor numérico válido maior que zero.\033[m') # printa mensagem colorida
+        else: # senão 
+            if funcionario["salario"]<=0: # se salário menor ou igual a zero
+                print('\033[0;31mSalário inválido. Insira um salário numérico superior a zero.\033[m') # printa mensagem colorida  
+            else: #senão
+                break # interrompe corrente laço
     colaboradores.append(funcionario.copy()) # na lista colaboradores, ao seu final de comprimento, receberá como último ítem uma cópia do dicionário funcionário
     print('**'*30)
-    nome = funcionario["nome"]
-    print(f'\033[32m\nFuncionário {nome} cadastrado(a) com sucesso!\033[m')
+    nome = funcionario["nome"] # variavel nome receve valor da chave nome
+    print(f'\033[32m\nFuncionário {nome} cadastrado(a) com sucesso!\033[m') # printa mensagem colorida
 
 
 
